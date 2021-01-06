@@ -28,22 +28,4 @@ namespace Actio.Api.Controllers
             return Accepted($"activites/{commnad.Id}");
         }
     }
-
-    [Route("[controller]")]
-    public class UsersControllerController: Controller
-    {
-        private readonly IBusClient _busClient;
-
-        public UsersControllerController(IBusClient busClient)
-        {
-            _busClient = busClient;
-        }
-
-        [HttpPost("register")] // /users/register
-        public async Task<IActionResult> Post([FromBody] CreateUser commnad)
-        {
-            await _busClient.PublishAsync(commnad);
-            return Accepted();
-        }
-    }
 }
